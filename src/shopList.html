@@ -129,7 +129,7 @@
                             </dl>
                         </dd>
                         <dt class="other-info">
-                            <div class="stock" style="display: none;">剩余120件
+                            <div class="skus" style="display: none;">剩余120件
                             </div>
                         </dt>
                     </dl>
@@ -183,12 +183,22 @@
                             $.each(data.data.style_type,function(index, elem){
                                 elem.select_id = '';
                                 elem.value.forEach(function(item){
-                                    item.hasQuantity = true;
+                                    if (data.data.style_type.length==1) {
+                                        data.data.skus.forEach(function(item2){
+                                            if (item2.id_names[elem.id_name] == item.id && item2.quantity == 0) {
+                                                item.hasQuantity = false;
+                                            }else{
+                                                item.hasQuantity = true;
+                                            }
+                                        })
+                                    }else{
+                                        item.hasQuantity = true;
+                                    }
                                 })
                             })
                             _self.goodsInfo = data.data;
 
-                            var priceList = _self.goodsInfo.stock;
+                            var priceList = _self.goodsInfo.skus;
 
                             priceList.sort(function(a, b) {
                                 return a.price - b.price
@@ -258,64 +268,125 @@
                     _self.searchTerms[item.id_name] = elem.id;
                 }
 
-                _self.skuList = getSelectItem( _self.searchTerms, _self.goodsInfo.stock);
+                _self.skuList = getSelectItem( _self.searchTerms, _self.goodsInfo.skus);
 
-                _self.goodsInfo.stock.forEach(function(elem2){
-                    if (elem2.quantity == 0 && elem2['id_names'][item.id_name] == elem.id) {
+                var length = _self.goodsInfo.style_type.length;
 
-                        var id_list = deepClone(elem2.id_names);
-                        delete id_list[item.id_name];
+                if (length==1) { //一种规格项目
 
-                        $.each(id_list,function(key, value){
-                            _self.goodsInfo.style_type.forEach(function(item1){
-                                if (item1.id_name == key) {
-                                    item1.value.forEach(function(item2){
-                                        if (item.select_id == '') {
-                                            item2.hasQuantity = true;
-                                        }else{
-                                            if (item2.id == value) {
-                                                item2.hasQuantity = false;
-                                            }else{
-                                                item2.hasQuantity = true;
-                                            }                                            
-                                        }
-                                    })
-                                }
-                            })
-                        })
+                }else if (length==2) { //两种规格项目
 
+                }else{ //三种规格项目
+                    if (getJsonLength(_self.searchTerms) == 2) {
+                        checkThree(_self.searchTerms);
+                    }else if (getJsonLength(_self.searchTerms) < 2){
+                        relaxStyleType(_self.goodsInfo.style_type);
+                    }else{
+                        var temp_obj = deepClone(_self.searchTerms);
+                        delete temp_obj[item.id_name];
+                        var temp_arr = objChangeArr(temp_obj, true);
+                        var obj1 = temp_arr[0];
+                        obj1[item.id_name] = elem.id;
+                        var obj2 = temp_arr[1];
+                        obj2[item.id_name] = elem.id;
+                        checkThree(obj1);
+                        checkThree(obj2);
                     }
-                })
-
-                var hasSelectAll = false, id_names = {};
-                this.goodsInfo.style_type.forEach(function(elem2){
-                    if (elem2.select_id == '') {
-                        hasSelectAll = false;
-                        return false;
-                    }
-                    id_names[elem2.id_name] = elem2.select_id;
-                    hasSelectAll = true;
-                })
-                if (hasSelectAll) {
-                    var is_same = false;
-                    _self.goodsInfo.stock.forEach(function(elem3){
-                        $.each(elem3.id_names,function(index, elem4){
-                            if (elem4 != id_names[index]) {
-                                is_same = false;
-                                return false;
-                            }
-                            is_same = true;
-                        })
-                        if (is_same) {
-                            _self.selected_original_price = elem3.price;
-                            _self.selected_current_price = elem3.price_dot;
-                        }
-                    })
                 }
+
+                // _self.goodsInfo.skus.forEach(function(elem2){
+                //     if (elem2.quantity == 0 && elem2['id_names'][item.id_name] == elem.id) {
+
+                //         var id_list = deepClone(elem2.id_names);
+                //         delete id_list[item.id_name];
+
+                //         $.each(id_list,function(key, value){
+                //             _self.goodsInfo.style_type.forEach(function(item1){
+                //                 if (item1.id_name == key) {
+                //                     item1.value.forEach(function(item2){
+                //                         if (item.select_id == '') {
+                //                             item2.hasQuantity = true;
+                //                         }else{
+                //                             if (item2.id == value) {
+                //                                 item2.hasQuantity = false;
+                //                             }else{
+                //                                 item2.hasQuantity = true;
+                //                             }                                            
+                //                         }
+                //                     })
+                //                 }
+                //             })
+                //         })
+
+                //     }
+                // })
+
+                // var hasSelectAll = false, id_names = {};
+                // this.goodsInfo.style_type.forEach(function(elem2){
+                //     if (elem2.select_id == '') {
+                //         hasSelectAll = false;
+                //         return false;
+                //     }
+                //     id_names[elem2.id_name] = elem2.select_id;
+                //     hasSelectAll = true;
+                // })
+                // if (hasSelectAll) {
+                //     var is_same = false;
+                //     _self.goodsInfo.skus.forEach(function(elem3){
+                //         $.each(elem3.id_names,function(index, elem4){
+                //             if (elem4 != id_names[index]) {
+                //                 is_same = false;
+                //                 return false;
+                //             }
+                //             is_same = true;
+                //         })
+                //         if (is_same) {
+                //             _self.selected_original_price = elem3.price;
+                //             _self.selected_current_price = elem3.price_dot;
+                //         }
+                //     })
+                // }
 
             }
         }
     })
+
+    function checkThree (searchTerms) {
+        var skuList = getSelectItem( searchTerms, vm.goodsInfo.skus);
+        var leftStyleType = getLeftStyleType(vm.goodsInfo.style_type, searchTerms);
+        relaxStyleType(leftStyleType);
+        checkQuantity(leftStyleType, skuList);
+    }
+
+    function relaxStyleType (styleTypeList) {
+        styleTypeList.forEach(function(elem){
+            elem.value.forEach(function(elem2){
+                elem2.hasQuantity = true;
+            })
+        })
+    }
+
+    function getLeftStyleType (styleTypeList, params) {
+        var new_arr = [];
+        styleTypeList.forEach(function(elem){
+            if (params[elem.id_name] == undefined) {
+                new_arr.push(elem);
+            }
+        })
+        return new_arr
+    }
+
+    function checkQuantity (styleTypeList, skuList) {
+        styleTypeList.forEach(function(elem){
+            elem.value.forEach(function(elem2){
+                skuList.forEach(function(elem3){
+                    if (elem3.id_names[elem.id_name] == elem2.id && elem3.quantity == 0) {
+                        elem2.hasQuantity = false;
+                    }
+                })                
+            })
+        })
+    }
 
     function getSelectItem(params, arr) {
         var new_arr = [] , loop_arr = arr;

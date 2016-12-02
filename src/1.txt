@@ -70,7 +70,7 @@
             ]
         }
         ],
-        "stock": [
+        "skus": [
             {
                 "sku_id": 35862101,
                 "price": 2500,
@@ -163,7 +163,7 @@
                     "v2_id": 1654572,
                     "v3_id": 1654581
                 },
-                "quantity": 0,
+                "quantity": 10,
                 "sold_quantity": 100,
                 "is_sell": 1
             },
@@ -177,7 +177,7 @@
                     "v2_id": 1654572,
                     "v3_id": 1654582
                 },
-                "quantity": 10,
+                "quantity": 0,
                 "sold_quantity": 100,
                 "is_sell": 1
             }
