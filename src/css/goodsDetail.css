@@ -310,6 +310,13 @@
     background-size: 24px;
 }
 
+.big-btn-1-1 {
+    overflow: hidden;
+    text-align: center;
+}
+.big-btn-1-1 .big-btn {
+    width: 100%;
+}
 .big-btn-2-1 {
     overflow: hidden;
     text-align: center;
@@ -596,6 +603,16 @@
     height: 1px;
     width: 9px;
     background-color: #666;
+}
+.quantity .plus::before {
+    position: absolute;
+}
+.sku-layout .quantity .plus.disabled {
+    background-color: #f8f8f8;
+    border-color: #e8e8e8 #e8e8e8 #e8e8e8 #999;
+}
+.sku-layout .quantity .plus.disabled::after, .sku-layout .quantity .plus.disabled::before {
+    background-color: #bbb;
 }
 .quantity .minus.disabled::before, .quantity .plus.disabled::after, .quantity .plus.disabled::before {
     background-color: #ddd;

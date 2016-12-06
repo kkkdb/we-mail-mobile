@@ -53,21 +53,6 @@
                     "name": "M"
                 }
             ]
-        },
-        {
-            "id": 16033,
-            "sku_style_key": "v3_id",
-            "name": "价格",
-            "style_list": [
-                {
-                    "id": 1654581,
-                    "name": "低"
-                },
-                {
-                    "id": 1654582,
-                    "name": "高"
-                }
-            ]
         }
         ],
         "skus": [
@@ -78,23 +63,9 @@
                 "outer_id": "10000558",
                 "style_id_list": {
                     "v1_id": 1654561,
-                    "v2_id": 1654571,
-                    "v3_id": 1654581
+                    "v2_id": 1654571
                 },
                 "quantity": 0,
-                "sold_quantity": 100,
-                "is_sell": 1
-            },{
-                "sku_id": 35862102,
-                "price": 2500,
-                "price_dot": 3500,
-                "outer_id": "10000559",
-                "style_id_list": {
-                    "v1_id": 1654561,
-                    "v2_id": 1654571,
-                    "v3_id": 1654582
-                },
-                "quantity": 10,
                 "sold_quantity": 100,
                 "is_sell": 1
             },
@@ -105,23 +76,9 @@
                 "outer_id": "10000560",
                 "style_id_list": {
                     "v1_id": 1654561,
-                    "v2_id": 1654572,
-                    "v3_id": 1654581
+                    "v2_id": 1654572
                 },
-                "quantity": 1,
-                "sold_quantity": 200,
-                "is_sell": 1
-            },{
-                "sku_id": 35862104,
-                "price": 2600,
-                "price_dot": 3600,
-                "outer_id": "10000561",
-                "style_id_list": {
-                    "v1_id": 1654561,
-                    "v2_id": 1654572,
-                    "v3_id": 1654582
-                },
-                "quantity": 20,
+                "quantity": 5,
                 "sold_quantity": 200,
                 "is_sell": 1
             },
@@ -132,22 +89,7 @@
                 "outer_id": "10000561",
                 "style_id_list": {
                     "v1_id": 1654562,
-                    "v2_id": 1654571,
-                    "v3_id": 1654581
-                },
-                "quantity": 10,
-                "sold_quantity": 100,
-                "is_sell": 1
-            },
-            {
-                "sku_id": 35862112,
-                "price": 2900,
-                "price_dot": 3900,
-                "outer_id": "10000562",
-                "style_id_list": {
-                    "v1_id": 1654562,
-                    "v2_id": 1654571,
-                    "v3_id": 1654582
+                    "v2_id": 1654571
                 },
                 "quantity": 20,
                 "sold_quantity": 100,
@@ -155,29 +97,14 @@
             },
             {
                 "sku_id": 35862113,
-                "price": 2800,
-                "price_dot": 3800,
+                "price": 2900,
+                "price_dot": 3900,
                 "outer_id": "10000563",
                 "style_id_list": {
                     "v1_id": 1654562,
-                    "v2_id": 1654572,
-                    "v3_id": 1654581
+                    "v2_id": 1654572
                 },
                 "quantity": 10,
-                "sold_quantity": 100,
-                "is_sell": 1
-            },
-            {
-                "sku_id": 35862114,
-                "price": 2900,
-                "price_dot": 3900,
-                "outer_id": "10000564",
-                "style_id_list": {
-                    "v1_id": 1654562,
-                    "v2_id": 1654572,
-                    "v3_id": 1654582
-                },
-                "quantity": 0,
                 "sold_quantity": 100,
                 "is_sell": 1
             }
