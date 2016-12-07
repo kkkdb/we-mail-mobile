@@ -1,3 +1,5 @@
+export {http, deepClone, getJsonLength, objChangeArr, msgAlert, msgLoad, msgLoadHide}
+
 //ajax请求
 function http(params){
     if (!params.url) {
