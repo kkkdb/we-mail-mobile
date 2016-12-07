@@ -7,4 +7,3 @@ var vm = new Vue({
 	}
 })
 
-alert(123)

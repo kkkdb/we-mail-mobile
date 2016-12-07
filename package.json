@@ -4,7 +4,7 @@
   "description": "基于vue + webpack + zepto构建的微信商城架构",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --colors --hot --config webpack.config.js",
+    "dev": "webpack-dev-server --inline --hot --port 2333",
     "build": "webpack -p"
   },
   "repository": {
