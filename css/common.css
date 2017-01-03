@@ -1,0 +1,76 @@
+#msgMask.weui-mask{
+    background-color: #fff;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.warning{
+	color: #CD2525;
+}
+
+.no-border{
+	border-top: none !important;
+	border-left: none !important;
+	border-right: none !important;
+	border-bottom: none !important;
+}
+.weui-loadmore_line{
+	padding-bottom: 50px;
+}
+
+.scroll-to-top{
+	width: 40px;
+	height: 40px;
+	position: fixed;
+	bottom: 52px;
+	right: 5%;
+	background: url('../img/scrollToTop.png') no-repeat 100% 100%;
+	background-size: cover;
+	display: none;
+	visibility: hidden;
+}
+
+.scroll-to-top.cd-is-visible{
+	display: block;
+	visibility: visible;
+}
+
+.block_a{
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+.no-margin-paddng{
+	margin: 0 !important;
+	padding: 0 !important;
+}
+.even{
+	border-right: 1px solid #eee;
+	margin-left: -1px !important;
+}
+
+.menu-list{
+	width: 100%;
+	height: 49px;
+	border-top: 1px solid #e5e5e5;
+	background-color: #fff;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 999999;
+	text-align: center;
+}
+.menu-list ul li{
+	float: left;
+	width: 24.999%;
+	height: 49px;
+	padding-top: 5px;
+	font-size: 12px;
+}
+.menu-list ul li img{
+	width: 25px;
+	height: 25px;
+	margin-bottom: 2px;
+}

@@ -1,0 +1,103 @@
+html, body{
+	height: 100%;
+	width: 100%;
+}
+.container{
+	height: 100%;
+}
+.order-detail{
+	font-size: 14px;
+}
+.block{
+	background-color: #fff;
+	box-sizing: border-box;
+	margin-bottom: 8px;
+	padding-left: 16px;
+}
+.order-detail-head{
+	height: 146px;
+	width: 100%;
+}
+.order-detail-head .top{
+	height: 72px;
+	border-bottom: 1px solid #D0D0D0;
+}
+.order-detail-head .top .order_sn, .order-detail-head .top .order_time{
+	height: 36px;
+	line-height: 36px;
+}
+.order_sn .order_status{
+	padding-right: 5%;
+}
+.order-detail-head .bottom{
+	height: 73px;
+	line-height: 73px;
+}
+.bottom .pay_it{
+	width: 98px;
+	height: 32px;
+	border: 1px solid #000;
+	line-height: 32px;
+	text-align: center;
+	margin-right: 5%;
+	margin-top: 20px;
+}
+
+.order-detail-address{
+	height: 100px;
+}
+
+.order-detail-address .user_info{
+	height: 50px;
+	line-height: 50px;
+}
+.order-detail-address .address_info{
+	font-size: 12px;
+	color: #919191;
+}
+
+.goods_item{
+	height: 100px;
+	box-sizing: border-box;
+	padding: 11px 0;
+	border-top: 1px solid #D0D0D0;
+}
+.goods_item .img_content{
+	width: 78px;
+	height: 78px;
+	float: left;
+	background-color: #f4f4f4;
+	margin-right: 16px;
+}
+.goods_item .goods_info{
+	width: 45%;
+	float: left;
+	height: 100%;
+}
+.goods_item .goods_info .goods_name{
+	height: 32px;
+	overflow: hidden;
+	line-height: 16px;
+}
+.goods_item .goods_info .goods_style_type{
+	height: 32px;
+	font-size: 12px;
+	color: #919191;
+}
+.goods_item .goods_info .goods_price{
+	height: 14px;
+}
+.goods_item .goods_num{
+	height: 100%;
+	float: right;
+	width: 20%;
+	padding-right: 5%;
+	text-align: right;
+	line-height: 78px;
+}
+
+
+.order-detail-bottom .bottom_item{
+	height: 32px;
+	line-height: 32px;
+}

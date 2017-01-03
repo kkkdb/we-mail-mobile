@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>购物车</title>
+    <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/1.1.0/weui.min.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/cart.css">
+    <link rel="stylesheet" href="./css/trade.css">
+</head>
+
+<body>
+    <div class="container" id='app'>
+        <div class="content clearfix js-page-content">
+            <!-- <div class="tabber tabber-n4 tabber-double-11 clearfix">
+                <a class="active" href="https://h5.koudaitong.com/v2/trade/cart?source=&amp;kdt_id=47999">购物车</a>
+                <a class="" href="https://h5.koudaitong.com/v2/trade/record/index?source=&amp;kdt_id=47999">购物记录</a>
+                <a class="" href="https://h5.koudaitong.com/v2/trade/record/luckymoney?source=&amp;kdt_id=47999">我的红包</a>
+                <a class="" href="https://h5.koudaitong.com/v2/trade/record/backs?source=&amp;kdt_id=47999">我的返现</a>
+            </div> -->
+            <div id="cart-container">
+                <div>
+                    <div class="js-shop-list shop-list">
+                        <template v-for='elem in shop_list'>
+                            <div class="block block-order block-cart" v-if='elem.goods_sku_list.length>0'>
+                                <div class="header">
+                                    <div class="select-group js-select-group" @click='checkShopAll(elem)'>
+                                        <span class="check" :class="{'checked': elem.shop_check_all}"></span>
+                                    </div>
+                                    <a class="shop-title" style="padding-left: 0;">
+                                        <!-- <i class="custom-store-img">店铺：</i> <span v-text='elem.shop_name'></span> -->
+                                        全选
+                                    </a>
+                                    <a href="javascript:;" v-if='elem.status=="edit"' @click='elem.status="delete"' class="j-edit-list pull-right c-blue font-size-12 edit-list">
+                                        编辑
+                                    </a>
+                                    <a href="javascript:;" v-else @click='elem.status="edit"' class="j-edit-list pull-right c-blue font-size-12 edit-list">
+                                        完成
+                                    </a>
+                                </div>
+                                <div>
+                                    <ul class="js-list block block-list block-list-cart border-0">
+                                        <li class="block-item block-item-cart" v-for='(item, index) in elem.goods_sku_list' :class="{'editing': elem.status=='delete'}">
+                                            <div>
+                                                <div class="check-container" @click='checkItem(item, elem)'>
+                                                    <span class="check" :class="{'checked': item.checked}"></span>
+                                                </div>
+                                                <div class="name-card clearfix">
+                                                    <a href="https://h5.koudaitong.com/v2/showcase/goods?alias=26u3e59j774tr" class="thumb js-goods-link">
+                                                        <img :data-original="item.thumb_url" class="js-lazy" :alt="item.title">
+                                                    </a>
+                                                    <div class="detail">
+                                                        <a href="https://h5.koudaitong.com/v2/showcase/goods?alias=26u3e59j774tr" class="js-goods-link">
+                                                            <h3 class="title js-ellipsis">
+                                                                <i v-text='item.title'></i>
+                                                            </h3>
+                                                        </a>
+                                                        <p class="sku ellipsis" v-text='item.style_value'></p>
+                                                        <div class="num">
+                                                            <template v-if='elem.status=="edit"'>
+                                                                ×<span class="num-txt" v-text='item.num'></span>
+                                                            </template>
+                                                            <template v-else>
+                                                                <div class="quantity">
+                                                                    <button type="button" class="minus" :class="{'disabled': item.num==1}" :disabled='item.num == 1'></button>
+                                                                    <input type="text" class="txt" v-model='item.num' readonly>
+                                                                    <button type="button" class="plus" :class="{'disabled': item.hasMaxQuantity}" :disabled="item.hasMaxQuantity" ></button>
+                                                                    <div class="response-area response-area-minus" @click='minusBuyQuantity(item)'></div>
+                                                                    <div class="response-area response-area-plus" @click='plusBuyQuantity(item)'></div>
+                                                                </div>
+                                                            </template>
+                                                        </div>
+                                                        <div class="price c-orange">
+                                                            ￥<span v-text='item.price'></span></div>
+                                                    </div>
+                                                    <div class="error-box"></div>
+                                                </div>
+                                                <div class="delete-btn" @click='deleteItem(elem, item, index)'><span>删除</span></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>                            
+                        </template>
+                    </div>
+                    <!---->
+                    <div style="padding:0;" class="js-bottom-opts bottom-fix">
+                        <div class="bottom-cart clear-fix">
+                            <!-- <div class="select-all" @click='checkAll'>
+                                <span class="check" :class="{'checked': check_all}"></span> 全选
+                            </div> -->
+                            <div class="total-price" :class="{'c-gray-dark': all_quantity==0}">
+                                合计：￥<span class="js-total-price" :class="{'c-gray-dark': all_quantity==0}" style="color: rgb(255, 102, 0);" v-text='all_price'></span>
+                                <p class="c-gray-dark">不含运费</p>
+                            </div>
+                            <button class="js-go-pay btn btn-orange-dark font-size-14" :disabled='all_quantity==0' @click="orderStart">
+                                结算
+                                <template v-if='all_quantity!=0'>(<span v-text='all_quantity'></span>)</template>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="footer" style="min-height: 86px;">
+            <div class="copyright">
+                <div class="ft-copyright " style="background-image: url(https://img.yzcdn.cn/upload_files/2016/11/10/147874273283881271.png);">
+                    <a class="yz-logo" href="https://m.youzan.com" target="_blank">有赞提供技术支持</a>
+                </div>
+            </div>
+        </div> -->
+        <!-- <menu-component is-buycar='1'></menu-component> -->
+    </div>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.1.3/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src="js/lazyload.min.js"></script>
+    <script src='config/master_config.js'></script>
+    <script src='js/common.js'></script>
+    <!-- <script src='js/menu.js'></script> -->
+    <script src='js/cart.js'></script>
+</body>
+
+</html>

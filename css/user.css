@@ -1,0 +1,86 @@
+html, body{
+	width: 100%;
+	height: 100%;
+}
+.container{
+	height: 100%;
+}
+.user{
+	font-size: 14px;
+}
+.user-head{
+	height: 120px;
+	background-color: #000;
+	position: relative;
+}
+.user-head .user-img{
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	top: 50%;
+	left: 16px;
+	margin-top: -40px;
+}
+.user-head .user-img img{
+	object-fit: cover;
+	border-radius: 100%;
+}
+.user-head .user-name{
+	position: absolute;
+	height: 32px;
+	line-height: 32px;
+	left: 120px;
+	top: 50%;
+	margin-top: -16px;
+	color: #fff;
+}
+.block{
+	margin-bottom: 5px;
+	padding-left: 16px;
+	background-color: #fff;
+}
+.user-order{
+	height: 134px;
+}
+
+.user-order .order-head{
+	position: relative;
+	height: 43px;
+	line-height: 43px;
+	border-bottom: 1px solid #D0D0D0;
+}
+.right-chevron:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    margin-top: -6px;
+    width: 6px;
+    height: 12px;
+    background: url('../img/right-chevron.png') no-repeat;
+    background-size: 6px 12px;
+}
+.order-status-list{
+	padding: 16px 0;
+}
+.order-status-list ul li.order-status-item{
+	width: 25%;
+	margin-left: -1px;
+	text-align: center;
+	border-left: 1px solid #D0D0D0;
+	float: left;
+}
+
+.order-status-list ul li.order-status-item .order-status-txt{
+	padding-top: 10px;
+	font-size: 12px;
+}
+.order-status-list ul li.order-status-item .order-status-icon{
+	margin-top: 5px;
+}
+
+.user-resale, .user-address{
+	height: 43px;
+	line-height: 43px;
+	position: relative;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>订单详情</title>
+    <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/1.1.0/weui.min.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/orderDetail.css">
+</head>
+
+<body>
+    <div class="container" id='app'>
+        <div class="content no-sidebar">
+            <div class="content-body order-detail">
+                <div class="order-detail-head block">
+                    <div class="top">
+                        <p class="order_sn clearfix">
+                            <span class="pull-left" v-text='"订单编号:"+order.order_sn'></span>
+                            <span class="pull-right order_status v-cloak">
+                                <i style="color:#CD2525" v-if='order.order_status=="0"' v-text='order.status'></i>
+                                <i style="color:#1088DA" v-if='order.order_status=="1"' v-text='order.status'></i>
+                                <i style="color:#2EC620" v-if='order.order_status=="2"' v-text='order.status'></i>
+                                <i style="color:#4CC600" v-if='order.order_status=="3"' v-text='order.status'></i>
+                            </span>
+                        </p>
+                        <p class="order_time" v-text='"下单时间:" + order.created_time'></p>
+                    </div>
+                    <div class="bottom">
+                        <span class='total_price pull-left warning' v-text='"需支付 ￥" + total_price'></span>
+                        <a :href='"./unPayed.html?order_id="+order.order_id'><div class="pay_it pull-right" v-if='order.order_status=="0"'>继续支付</div></a>
+                        <div class="pay_it pull-right" v-if='order.order_status=="2"'>物流查看</div>
+                    </div>
+                </div>
+                <div class="order-detail-address block">
+                    <div class="user_info">
+                        <span v-text='order.receive_name'></span>
+                        <span v-text='order.mobile' style="margin-left: 16px;"></span>
+                    </div>
+                    <div class="address_info" v-text="order.province_name + order.city_name + order.district_name + order.shipping_address"></div>
+                </div>
+                <div class="order-detail-goods block">
+                    <div class="goods_item clearfix" :class="{'no-border': index == 0}" v-for='(elem, index) in order.sku_list'>
+                        <div class="img_content">
+                            <img :src="elem.thumb_url" alt="elem.title" width="78" height="78">
+                        </div>
+                        <div class="goods_info">
+                            <p class="goods_name" v-text='elem.title'></p>
+                            <p class="goods_style_type" v-text='elem.style_name'></p>
+                            <p class="goods_price" v-text="'￥' + elem.price"></p>
+                        </div>
+                        <div class="goods_num" v-text="'X ' + elem.goods_number"></div>                                        
+                    </div>
+                </div>
+                <div class="order-detail-bottom block">
+                    <div class="bottom_item" v-text="'共'+total_num+'件商品'"></div>
+                    <div class="bottom_item warning" v-text="'总计:￥'+total_price"></div>
+                    <div class="bottom_item" v-text='"支付方式:" + order.pay_type_name'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.1.3/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src='config/master_config.js'></script>
+    <script src='js/common.js'></script>
+    <script src='js/constant.js'></script>
+    <script src="js/orderDetail.js"></script>
+</body>
+</html>

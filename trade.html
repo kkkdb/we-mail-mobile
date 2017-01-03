@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>代付款的订单</title>
+    <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/1.1.0/weui.min.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/LArea.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/trade.css">
+    <link rel="stylesheet" href="./css/order.css">
+    <style>
+    .actionSheet {
+        position: absolute;
+        overflow: hidden;
+        z-index: 1000;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background: #fff;
+        visibility: visible;
+        transform: translate3d(0px, 200px, 0px);
+        opacity: 0;
+        transition: all 300ms ease;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="content confirm-container">
+                <div class="app app-order">
+                    <div class="app-inner inner-order" id="js-page-content">
+                        <div class="order-top-info-block block block-list border-top-0">
+                            <!-- 物流 -->
+                            <div class="block-item express border-0" id="js-logistics-container" style="margin-top: -1px;">
+                                <div class="js-logistics-content logistics-content js-express">
+                                    <div class="">
+                                        <div class="js-order-address express-panel js-edit-address express-panel-edit" v-if='trade.address&&trade.address.address_id' @click='showAddress(1)'>
+                                            <ul class="express-detail">
+                                                <li class="clearfix">
+                                                    <span class="name">
+                                                        收货人： {{trade.address.receive_name}}                                                   
+                                                    </span>
+                                                    <span class="tel" v-text="trade.address.mobile"></span>
+                                                </li>
+                                                <li class="address-detail">
+                                                    收货地址： {{trade.address.province_name}}{{trade.address.city_name}}{{trade.address.district_name}}{{trade.address.shipping_address}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="js-edit-address empty-address-tip no-user-select" @click='showAddress(0)' v-else>
+                                            新增收货地址
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="js-goods-list-container block block-list block-order ">
+                            <!-- <div class="js-header header"><a class="font-size-14" href="https://h5.koudaitong.com/v2/showcase/homepage?kdt_id=47999">良品铺子手机商城</a>
+                            </div> -->
+                            <div class="js-goods-list">
+                                <div class="js-goods-item order-goods-item clearfix block-list" v-for='item in trade.sku_list'>
+                                    <div class="name-card name-card-goods clearfix block-item">
+                                        <a href="javascript:;" class="thumb">
+                                            <img class="js-view-image" :src="item.thumb_url" :alt="item.title">
+                                        </a>
+                                        <div class="detail">
+                                            <div class="clearfix detail-row">
+                                                <div class="right-col text-right">
+                                                    <div class="price">￥<span v-text='item.price'></span></div>
+                                                </div>
+                                                <div class="left-col">
+                                                    <a href="javascript:;">
+                                                        <h3 class="l2-ellipsis" v-text='item.title'></h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix detail-row">
+                                                <div class="right-col">
+                                                    <div class="num c-gray-darker">×<span class="num-txt" v-text='item.num'></span></div>
+                                                </div>
+                                                <div class="left-col">
+                                                    <p class="c-gray-darker sku" v-text='item.style_value'></p>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix detail-row">
+                                                <div class="right-col">
+                                                    <div class="goods-action">
+                                                    </div>
+                                                </div>
+                                                <div class="left-col">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="js-total block-item order-message border-none"><span>合计</span>
+                                <div class="js-sum-price input-wrapper c-orange pull-right">
+                                    ￥<i v-text='total_price'></i>
+                                </div>
+                            </div>
+                            <div class="js-pay-block block-item info-panel" @click='choosePayType'>
+                                <span class="left-part">支付方式</span>
+                                <div class="js-express-info right-part c-gray-darker arrow">
+                                    <i v-if='pay_type=="WEIXIN"'>微信支付</i>
+                                    <i v-if='pay_type=="ZFB"'>支付宝支付</i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="js-used-coupon block block-item">
+                            <div class="info-panel info-panel-big clearfix">
+                                <h4 class="left-part">优惠</h4>
+                                <div class="js-right-part right-part arrow">
+                                    <div class="js-normal-coupon detail c-gray-darker js-change-coupon">
+                                        <span>使用优惠</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!--  <div class="js-send-message send-message block block-item">
+                            <div class="info-panel info-panel-big clearfix">
+                                <h4 class="left-part">短信通知收件人</h4>
+                                <div class="weui-cell__ft">
+                                    <input class="weui-switch" type="checkbox" checked="true">
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- <div class="js-order-total block-item block order-total">
+                            <p>
+                                <span>商品金额</span>
+                                <span class="pull-right c-gray-darker">￥<i v-text='total_price'></i></span>
+                            </p>
+                            <p>
+                                <span>运费</span>
+                                <span class="pull-right c-gray-darker">+ ￥0.00</span>
+                            </p>
+                        </div> -->
+                        <div class="js-order-total-pay order-total-pay bottom-fix">
+                            <div class="pay-container clearfix">
+                                <div class="pull-right pull-margin-up">
+                                    <span class="c-gray-darker font-size-16">合计：</span>
+                                    <span class="js-price c-red-f44 font-size-16">￥<i v-text='total_price_1'></i></span>
+                                    <span class="js-price-sub c-red-f44 font-size-12"><i v-text='total_price_2'></i></span>
+                                    <button class="js-confirm btn btn-red-f44" @click='tradeBill'>提交订单</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-inner inner-order peerpay-gift" style="display:none;" id="sku-message-poppage">
+                        <h2>备注信息</h2>
+                        <ul class="block form js-message-container"></ul>
+                        <div class="action-container">
+                            <button class="btn btn-white btn-block js-cancel">查看订单详情</button>
+                        </div>
+                    </div>
+                    <div class="app-inner inner-order" style="display:none;padding-top:40px;" id="js-datetime-picker-poppage">
+                    </div>
+                    <div class="app-inner inner-order selffetch-address" style="display:none;padding-top:40px;" id="js-address-poppage">
+                    </div>
+                    <!-- <div class="center action-tip  js-pay-tip">本订单享受&nbsp;<img src="https://img.yzcdn.cn/public_files/2016/01/05/f32fc608cf4173bffa3c23b0ad682bf9.png" height="16" style="vertical-align: text-bottom;">&nbsp;保险保障</div> -->
+                </div>
+            </div>
+        </div>
+        <div class="select_address" v-show="select_address || add_address">
+            <div class="weui-mask add_address_mask" v-show='add_address'></div>
+            <div class="actionSheet add_address_box" v-show='add_address'>
+                <form class="js-address-fm address-ui address-fm">
+                    <h4 class="address-fm-title">
+                        <span v-if='selectedAddressId'>修改收货地址</span>
+                        <span v-else>新增收货地址</span>
+                    </h4>
+                    <div class="js-address-cancel cancel-img" @click='cancelAddress(0)'></div>
+                    <div class="block form" style="margin:0;">
+                        <div class="block-item no-top-border">
+                            <label>收货人</label>
+                            <input type="text" name="user_name" value="" placeholder="名字" v-model='formData.receive_name'>
+                        </div>
+                        <div class="block-item">
+                            <label>联系电话</label>
+                            <input type="tel" name="tel" value="" placeholder="手机或固定电话" v-model="formData.mobile">
+                        </div>
+                        <div class="block-item">
+                            <label>选择地区</label>
+                            <input type="text" value="" placeholder="省、市、区" v-model="area_name" readonly id="areaSelect">
+                        </div>
+                        <!-- <div class="block-item">
+                            <label></label>
+                            <textarea class="js-community" placeholder="详细地址"></textarea>
+                        </div> -->
+                        <div class="block-item">
+                            <label>详细地址</label>
+                            <input type="text" name="address_detail" value="" placeholder="街道门牌，无需重复地区信息" v-model="formData.shipping_address">
+                        </div>
+                        <!-- <div class="block-item">
+                            <label>邮政编码</label>
+                            <input type="tel" maxlength="6" name="postal_code" value="" placeholder="邮政编码(选填)">
+                        </div> -->
+                    </div>
+                    <div class="action-container">
+                        <a class="js-address-save btn btn-block btn-green" @click="addNewAddress">保存</a>
+                        <a class="js-address-delete btn btn-block btn-white" v-if='selectedAddressId' @click='deleteAddress'>删除收货地址</a>
+                    </div>
+                </form>
+            </div>
+            <div class="weui-mask select_address_mask" v-show='select_address'></div>
+            <div class="actionSheet select_address_box" v-show='select_address'>
+                <div class="js-scene-address-list">
+                    <div class="address-ui address-list">
+                        <h4 class="address-title">选择收货地址</h4>
+                        <div class="cancel-img js-cancel" @click='cancelAddress(1)'></div>
+                        <div class="js-address-container address-container block block-list border-top-0">
+                            <div id="js-address-item-47885629" class="js-address-item block-item " v-for='item in address_list'>
+                                <div @click='changeSelectedAddress(item)'>
+                                    <div class="icon-check" :class="{'icon-checked': item.status=='DEFAULT'}"></div>
+                                    <p>
+                                        <span class="address-name" style="margin-right: 5px;" v-text='item.receive_name'></span>,
+                                        <span class="address-tel" v-text='item.mobile'></span>
+                                    </p>
+                                    <span class="address-str address-str-sf">收货地址：{{item.province_name}}{{item.city_name}}{{item.district_name}}{{item.shipping_address}}</span>
+                                    <div class="address-opt  js-edit-address " @click='editAddressItem(item, $event)'>
+                                        <i class="icon-circle-info"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-address js-add-address" @click='showAddress(0)'>
+                            <span class="icon-add"></span>
+                            <a class="" href="javascript:;">新增地址</a>
+                            <span class="icon-arrow-right"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pay_type" v-show="select_pay_type">
+            <div class="weui-mask pay_type_mask" @click='hidePayChoose'></div>
+            <div class="pay-btn-popup popup pay_type_box actionSheet">
+                <div style="margin-bottom: 10px;" v-for="item in trade.pay_type_list">
+                    <button type="button" class="btn-pay btn btn-block btn-large" :class="{'btn-blue': pay_type==item.pay_type,'btn-white': pay_type!=item.pay_type}"  @click="choosePayTypeItem(item.pay_type)">
+                        {{item.pay_type_name}}
+                    </button>
+                </div>
+                <!-- <div style="margin-bottom: 10px;">
+                    <button type="button" class="btn-pay btn btn-block btn-large" :class="{'btn-blue': pay_type=='ZFB','btn-white': pay_type!='ZFB'}" @click="choosePayTypeItem('ZFB')">
+                        支付宝付款
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="//cdn.bootcss.com/vue/2.1.3/vue.min.js"></script>
+<script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+<script src='config/master_config.js'></script>
+<script src='js/common.js'></script>
+<script src='js/LArea.js'></script>
+<script src='js/trade.js'></script>
+
+</html>
