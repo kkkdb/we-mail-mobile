@@ -1,0 +1,129 @@
+html, body{
+	height: 100%;
+	width: 100%;
+}
+body{
+	background-color: #fff;
+}
+@media (max-width: 320px){
+    .order_item_head .head-left{
+		float: left;
+		padding-left: 1%;
+	}
+	.order_item_body{
+		padding-left: 1%;
+	}
+}
+
+.container {
+	width: 100%;
+	font-size: 14px;
+}
+.topper{
+	width: 100%;
+	height: 37px;
+	background-color: #fff;
+	margin-bottom: 5px;
+}
+.topper .top_nav li{
+	float: left;
+	width: 20%;
+	font-size: 14px;
+	line-height: 37px;
+	text-align: center;
+}
+
+.topper .top_nav li.active{
+	border-bottom: 2px solid #CD2525;
+}
+
+.order_body{
+	width: 100%;
+}
+li.order_item{
+	padding-left: 16px;
+	background-color: #fff;
+	margin-bottom: 8px;
+}
+li.order_item .order_item_head{
+	border-bottom: 1px solid #D0D0D0;
+	line-height: 37px;
+	height: 37px;
+}
+.order_item_head .head-left{
+	float: left;
+	padding-left: 3%;
+}
+.order_item_head .head-right{
+	float: right;
+	padding-right: 5%;
+}
+
+.order_item_body{
+	border-bottom: 1px solid #D0D0D0;
+}
+.order_item_body .goods_item{
+	height: 100px;
+	box-sizing: border-box;
+	padding: 11px 0;
+	border-top: 1px solid #D0D0D0;
+}
+.goods_item .img_content{
+	width: 78px;
+	height: 78px;
+	float: left;
+	background-color: #f4f4f4;
+	margin-right: 16px;
+}
+.goods_item .goods_info{
+	width: 45%;
+	float: left;
+	height: 100%;
+}
+.goods_item .goods_info .goods_name{
+	height: 32px;
+	overflow: hidden;
+	line-height: 16px;
+}
+.goods_item .goods_info .goods_style_type{
+	height: 32px;
+	font-size: 12px;
+	color: #919191;
+	overflow: hidden;
+	line-height: 16px;
+}
+.goods_item .goods_info .goods_price{
+	height: 14px;
+}
+.goods_item .goods_num{
+	height: 100%;
+	float: right;
+	width: 20%;
+	padding-right: 5%;
+	text-align: right;
+	line-height: 78px;
+}
+.order_item_foot .total_price{
+	height: 60px;
+	line-height: 60px;
+	padding-right: 5%;
+	padding-left: 32px;
+	color: #CD2525;
+}
+.order_item_foot .total_num{
+	height: 60px;
+	line-height: 60px;
+	color: #919191;
+}
+.order_item_foot .button_content{
+	width: 100%;
+}
+.order_item_foot .button_content .pay_it{
+	width: 98px;
+	height: 32px;
+	border: 1px solid #000;
+	line-height: 32px;
+	text-align: center;
+	margin-right: 5%;
+	margin-bottom: 16px;
+}

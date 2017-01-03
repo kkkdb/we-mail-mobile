@@ -1,38 +1,36 @@
 {
-  "name": "wemail",
+  "name": "weishop_mobile",
   "version": "1.0.0",
-  "description": "基于vue + webpack + zepto构建的微信商城架构",
-  "main": "webpack.config.js",
+  "description": "",
+  "main": "gulpfile.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot --port 2333",
-    "build": "webpack -p"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kkkdb/weMail.git"
+    "build": "gulp start"
   },
   "author": "dbkong",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kkkdb/weMail/issues"
-  },
-  "homepage": "https://github.com/kkkdb/weMail#readme",
   "devDependencies": {
-    "babel-core": "^6.18.2",
-    "babel-loader": "^6.2.8",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-runtime": "^6.18.0",
-    "css-loader": "^0.26.1",
-    "vue-hot-reload-api": "^2.0.6",
-    "vue-html-loader": "^1.2.3",
-    "vue-loader": "^10.0.2",
-    "vue-style-loader": "^1.0.0",
-    "vue-template-compiler": "^2.1.4",
-    "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.16.2"
-  },
-  "dependencies": {
-    "vue": "^2.1.4"
+    "apache-server-configs": "^2.14.0",
+    "archiver": "^1.3.0",
+    "del": "^2.2.2",
+    "glob": "^7.1.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-changed": "^1.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-csslint": "^1.0.0",
+    "gulp-header": "^1.8.8",
+    "gulp-if": "^2.0.2",
+    "gulp-jshint": "^2.0.4",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-rev": "^7.1.2",
+    "gulp-rev-collector": "^1.0.5",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "mocha": "^3.2.0",
+    "run-sequence": "^1.2.2"
   }
 }

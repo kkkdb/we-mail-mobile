@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>待付款的订单</title>
+    <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/1.1.0/weui.min.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/LArea.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/trade.css">
+    <link rel="stylesheet" href="./css/order.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="content confirm-container">
+                <div class="app app-order">
+                    <div class="app-inner inner-order" id="js-page-content">
+                        <div class="order-top-info-block block block-list border-top-0">
+                            <!-- 物流 -->
+                            <div class="block-item express border-0" id="js-logistics-container" style="margin-top: -1px;">
+                                <div class="js-logistics-content logistics-content js-express">
+                                    <div class="">
+                                        <div class="js-order-address express-panel js-edit-address">
+                                            <ul class="express-detail">
+                                                <li class="clearfix">
+                                                    <span class="name">
+                                                        收货人： {{trade.receive_name}}                                                   
+                                                    </span>
+                                                    <span class="tel" v-text="trade.mobile"></span>
+                                                </li>
+                                                <li class="address-detail">
+                                                    收货地址： {{trade.province_name}}{{trade.city_name}}{{trade.district_name}}{{trade.shipping_address}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="js-goods-list-container block block-list block-order ">
+                            <!-- <div class="js-header header"><a class="font-size-14" href="https://h5.koudaitong.com/v2/showcase/homepage?kdt_id=47999">良品铺子手机商城</a>
+                            </div> -->
+                            <div class="js-goods-list">
+                                <div class="js-goods-item order-goods-item clearfix block-list" v-for='item in trade.sku_list'>
+                                    <div class="name-card name-card-goods clearfix block-item">
+                                        <a href="javascript:;" class="thumb">
+                                            <img class="js-view-image" :src="item.thumb_url" :alt="item.title">
+                                        </a>
+                                        <div class="detail">
+                                            <div class="clearfix detail-row">
+                                                <div class="right-col text-right">
+                                                    <div class="price">￥<span v-text='item.price'></span></div>
+                                                </div>
+                                                <div class="left-col">
+                                                    <a href="javascript:;">
+                                                        <h3 class="l2-ellipsis" v-text='item.title'></h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix detail-row">
+                                                <div class="right-col">
+                                                    <div class="num c-gray-darker">×<span class="num-txt" v-text='item.goods_number'></span></div>
+                                                </div>
+                                                <div class="left-col">
+                                                    <p class="c-gray-darker sku" v-text='item.style_value'></p>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix detail-row">
+                                                <div class="right-col">
+                                                    <div class="goods-action">
+                                                    </div>
+                                                </div>
+                                                <div class="left-col">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="js-total block-item order-message border-none"><span>合计</span>
+                                <div class="js-sum-price input-wrapper c-orange pull-right">
+                                    ￥<i v-text='total_price'></i>
+                                </div>
+                            </div>
+                            <div class="js-pay-block block-item info-panel">
+                                <span class="left-part">支付方式</span>
+                                <div class="js-express-info right-part c-gray-darker">
+                                    <i v-if='pay_type=="WEIXIN"'>微信支付</i>
+                                    <i v-if='pay_type=="ZFB"'>支付宝支付</i>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="js-order-total-pay order-total-pay bottom-fix">
+                            <div class="pay-container clearfix">
+                                <div class="pull-right pull-margin-up">
+                                    <span class="c-gray-darker font-size-16">合计：</span>
+                                    <span class="js-price c-red-f44 font-size-16">￥<i v-text='total_price_1'></i></span>
+                                    <span class="js-price-sub c-red-f44 font-size-12"><i v-text='total_price_2'></i></span>
+                                    <button class="js-confirm btn btn-red-f44" @click='tradeBill'>去支付</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-inner inner-order peerpay-gift" style="display:none;" id="sku-message-poppage">
+                        <h2>备注信息</h2>
+                        <ul class="block form js-message-container"></ul>
+                        <div class="action-container">
+                            <button class="btn btn-white btn-block js-cancel">查看订单详情</button>
+                        </div>
+                    </div>
+                    <div class="app-inner inner-order" style="display:none;padding-top:40px;" id="js-datetime-picker-poppage">
+                    </div>
+                    <div class="app-inner inner-order selffetch-address" style="display:none;padding-top:40px;" id="js-address-poppage">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="//cdn.bootcss.com/vue/2.1.3/vue.min.js"></script>
+<script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+<script src='config/master_config.js'></script>
+<script src='js/common.js'></script>
+<script src='js/unPayed.js'></script>
+
+</html>

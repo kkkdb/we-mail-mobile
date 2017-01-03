@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>地址列表</title>
+    <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/1.1.0/weui.min.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/address.css">
+</head>
+
+<body>
+    <div class="container" id='app'>
+        <div class="content no-sidebar">
+            <div class="content-body address_list">
+                <div class="address-list">
+                    <ul class="ul-addredd-list">
+                        <li class="address-list-item" v-for='item in address_list'>
+                            <p class="clearfix">
+                                <span class="receive_name">{{item.receive_name}}</span>
+                                <span class="mobile">{{item.mobile}}</span>
+                                <span class="default" v-if='item.status=="DEFAULT"'>默认</span>
+                                <span class="set-default" v-else @click='setDeafult(item.address_id)'>设为默认</span>
+                            </p>
+                            <span class="address-str">{{item.province_name}}{{item.city_name}}{{item.district_name}}{{item.shipping_address}}</span>
+                            <div class="address-pot">
+                                <a :href="'./addressEdit.html?address_id='+item.address_id">
+                                    <i class="icon-circle-info"></i>                                    
+                                </a>
+                            </div>
+                            <div class="delete" @click="deleteAddress(item, $event)">删除</div>
+                        </li>
+                    </ul>                    
+                </div>
+                <div class="big-btn-1-1"><a href="./addressEdit.html" class="js-confirm-it big-btn red-btn"><img src="./img/plus.png"> 新建地址</a></div>
+            </div>
+        </div>
+    </div>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.1.3/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src='config/master_config.js'></script>
+    <script src='js/common.js'></script>
+    <script src="js/addressList.js"></script>
+</body>
+</html>

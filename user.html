@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>用户中心</title>
+    <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/1.1.0/weui.min.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/user.css">
+</head>
+
+<body>
+    <div class="container" id='app'>
+        <div class="content no-sidebar">
+            <div class="content-body user">
+                <div class="user-head">
+                    <div class="user-img">
+                        <img :src="user.headimgurl" alt="" width="80" height="80">
+                    </div>
+                    <div class="user-name" v-text='user.nickname'></div>
+                </div>
+                <div class="user-order block">
+                    <div class="order-head right-chevron">
+                        <a href="./orderList.html?status=ALL" class="block_a">
+                            全部订单                            
+                        </a>
+                    </div>
+                    <div class="order-status-list clearfix">
+                        <ul>
+                            <li class="order-status-item no-border">
+                                <a href="./orderList.html?status=UN_PAYED" class="block_a">
+                                    <img src="./img/UN_PAYED.png" alt="待付款" class="order-status-icon" width="30" height="30">
+                                    <p class="order-status-txt">待付款</p>
+                                </a>
+                            </li>
+                            <li class="order-status-item">
+                                <a href="./orderList.html?status=UN_SHIPPED" class="block_a">
+                                    <img src="./img/UN_SHIPPED.png" alt="待付款" class="order-status-icon" width="30" height="30">
+                                    <p class="order-status-txt">待发货</p>
+                                </a>
+                            </li>
+                            <li class="order-status-item">
+                                <a href="./orderList.html?status=SHIPPED" class="block_a">
+                                    <img src="./img/SHIPPED.png" alt="待付款" class="order-status-icon" width="30" height="25" style="padding: 3px 0 2px 0;">
+                                    <p class="order-status-txt">已发货</p>
+                                </a>
+                            </li>
+                            <li class="order-status-item">
+                                <a href="./orderList.html?status=CLOSED" class="block_a">
+                                    <img src="./img/CLOSED.png" alt="待付款" class="order-status-icon" width="30" height="30">
+                                    <p class="order-status-txt">已完成</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="user-resale right-chevron block">
+                    退款/售后
+                </div>
+                <div class="user-address right-chevron block">
+                    <a href="./addressList.html" class="block_a">
+                        地址管理
+                    </a>
+                </div>
+            </div>
+        </div>
+        <menu-component is-user='1'></menu-component>
+    </div>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.1.3/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src='config/master_config.js'></script>
+    <script src='js/common.js'></script>
+    <script src='js/menu.js'></script>
+    <script src="js/user.js"></script>
+</body>
+</html>

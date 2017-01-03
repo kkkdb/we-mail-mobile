@@ -1,0 +1,158 @@
+html,body{
+	width: 100%;
+	height: 100%;
+}
+.container{
+	font-size: 14px;
+	height: 100%;
+	background-color: #fff;
+}
+
+.address-list, .address_edit_box{
+	padding-left: 16px;
+}
+.address-list .ul-addredd-list{
+	overflow: hidden;
+}
+.address-list-item.can-delete{
+	transform: translate3d(-15%,0,0);
+}
+.address-list-item{
+	width: 130%;
+	height: 96px;
+	border-bottom: 1px solid #D0D0D0;
+	box-sizing: border-box;
+	padding: 15px 0;
+	position: relative;
+	transition: all ease 500ms;
+}
+.address-list-item p{
+	margin-bottom: 12px;
+	height: 16px;
+	line-height: 16px;
+}
+.address-list-item p span{
+	float: left;
+}
+.address-list-item p span.receive_name{
+	overflow: hidden;
+	width: 15%;
+}
+.address-list-item p span.mobile{
+	margin-left: 10px;
+	width: 25%;
+}
+.address-list-item p span.set-default{
+	color: #2D94FF;
+}
+.address-list-item p span.default{
+	/*margin-left: 30px;*/
+	display: inline-block;
+	width: 40px;
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+	background-color: #CD2525;
+	color: #fff;
+}
+.address-list-item .address-str{
+	font-size: 12px;
+	color: #A9A9A9;
+	width: 80%;
+	display: block;
+}
+.address-list-item .delete{
+	width: 15%;
+	background-color: red;
+	line-height: 96px;
+	text-align: center;
+	color: #fff;
+	position: absolute;
+	right: 8%;
+	top: 0;
+}
+.address-pot{
+	position: absolute;
+    top: 50%;
+    right: 28%;
+    margin-top: -26px;
+    padding: 10px 15px 10px 10px;
+    z-index: 5;
+}
+.address-pot .icon-circle-info{
+	display: inline-block;
+    width: 24px;
+    height: 26px;
+    background-image: url(../img/edit_address@2x.png);
+    background-repeat: no-repeat;
+    background-size: 24px 26px;
+}
+.big-btn-1-1 {
+    overflow: hidden;
+    text-align: center;
+}
+.big-btn {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+    line-height: 50px;
+    font-size: 16px;
+    padding: 0;
+    border: none;
+    vertical-align: top;
+    height: 50px;
+    float: left;
+	color: #fff;
+    background: #f44;
+}
+.address-edit{
+	background-color: #fff;
+}
+.input-block{
+	height: 50px;
+	border-bottom: 1px solid #D0D0D0;
+}
+.input-block input{
+	padding: 10px 0;
+	height: 30px;
+	border: 0;
+	outline: 0;
+	width: 99%;
+	background-color: #fff;
+}
+.address_edit_box .set-default{
+	color: #919191;
+	margin-top: 40px;
+}
+.address_edit_box .set-default .center{
+	position: relative;
+	width: 40%;
+	margin: 0 auto;
+	height: 30px;
+	line-height: 30px;
+}
+.address_edit_box .set-default .center .center_txt{
+	position: absolute;
+	left: 30px;
+	top: 0;
+}
+.address_edit_box .set-default .check{
+	height: 20px;
+	width: 20px;
+	display: inline-block;
+	position: absolute;
+	top: 5px;
+	left: 0;
+	background: url('../img/check.png') no-repeat;
+	background-size: cover;
+}
+.address_edit_box .set-default .check.checked{
+	background: url('../img/checked.png') no-repeat;
+	background-size: cover;
+}
+
+.weui-picker{
+	font-size: 16px;
+	font: normal !important;
+}
